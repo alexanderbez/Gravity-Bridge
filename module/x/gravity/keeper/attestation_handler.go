@@ -68,7 +68,7 @@ func (a AttestationHandler) Handle(ctx sdk.Context, att types.Attestation, claim
 		// a bogus event, this would create lost tokens stuck in the bridge
 		// and not accessible to anyone
 		if errTokenAddress != nil {
-			hash, _ := claim.ClaimHash()
+			hash, err := claim.ClaimHash()
 			a.keeper.logger(ctx).Error("Invalid token contract",
 				"cause", errTokenAddress.Error(),
 				"claim type", claim.GetType(),
