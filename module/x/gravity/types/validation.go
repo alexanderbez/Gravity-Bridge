@@ -75,10 +75,10 @@ func (i InternalBridgeValidator) ToExternal() BridgeValidator {
 // InternalBridgeValidators is the sorted set of validator data for Ethereum bridge MultiSig set
 type InternalBridgeValidators []*InternalBridgeValidator
 
-func (i InternalBridgeValidators) ToExternal() BridgeValidators {
-	bridgeValidators := make([]BridgeValidator, len(i))
-	for b := range bridgeValidators {
-		bridgeValidators[b] = i[b].ToExternal()
+func (b InternalBridgeValidators) ToExternal() BridgeValidators {
+	bridgeValidators := make([]BridgeValidator, len(b))
+	for i := range bridgeValidators {
+		bridgeValidators[i] = b[i].ToExternal()
 	}
 
 	return BridgeValidators(bridgeValidators)
@@ -293,10 +293,10 @@ func (v Valsets) Swap(i, j int) {
 }
 
 // GetFees returns the total fees contained within a given batch
-func (b OutgoingTxBatch) GetFees() sdk.Int {
+func (o OutgoingTxBatch) GetFees() sdk.Int {
 	sum := sdk.ZeroInt()
-	for _, t := range b.Transactions {
-		sum = sum.Add(t.Erc20Fee.Amount)
+	for _, t := range o.Transactions {
+		sum.Add(t.Erc20Fee.Amount)
 	}
 	return sum
 }

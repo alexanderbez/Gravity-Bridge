@@ -336,8 +336,8 @@ func GetERC20ToDenomKey(erc20 EthAddress) string {
 	return ERC20ToDenomKey + erc20.GetAddress()
 }
 
-func GetOutgoingLogicCallKey(invalidationId []byte, invalidationNonce uint64) string {
-	a := KeyOutgoingLogicCall + string(invalidationId)
+func GetOutgoingLogicCallKey(invalidationID []byte, invalidationNonce uint64) string {
+	a := KeyOutgoingLogicCall + string(invalidationID)
 	return a + string(UInt64Bytes(invalidationNonce))
 }
 
